@@ -2,6 +2,7 @@ import { Router } from 'express';
 import prisma from '../config/database.js';
 import { validate } from '../middleware/validate.js';
 import { allocationSchema, MONTHLY_HOURS } from '@wip-it-good/shared';
+import { Prisma } from '@prisma/client';
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
   try {
     const { staffId, initiativeId, month, year } = req.query;
     
-    const where: any = {};
+    const where: Prisma.AllocationWhereInput = {};
     if (staffId) where.staffId = staffId as string;
     if (initiativeId) where.initiativeId = initiativeId as string;
     if (month) where.month = parseInt(month as string);

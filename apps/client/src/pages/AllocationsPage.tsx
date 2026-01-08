@@ -140,10 +140,6 @@ export default function AllocationsPage() {
     }
   };
 
-  const handleAddRow = () => {
-    // Not needed anymore - row is always there
-  };
-
   const handleSaveNewRow = (staffId: string, initiativeId: string) => {
     if (!staffId || !initiativeId) return;
     
