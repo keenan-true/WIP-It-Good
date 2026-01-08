@@ -125,11 +125,21 @@ router.post('/import', upload.single('file'), async (req, res) => {
     const csvData = req.file.buffer.toString('utf-8');
     const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
 
-    const errors: any[] = [];
-    const created: any[] = [];
+    interface ImportError {
+      row: number;
+      error: string;
+    }
+
+    interface CreatedStaff {
+      id: string;
+      name: string;
+    }
+
+    const errors: ImportError[] = [];
+    const created: CreatedStaff[] = [];
 
     for (let i = 0; i < parsed.data.length; i++) {
-      const row: any = parsed.data[i];
+      const row = parsed.data[i] as Record<string, string>;
       
       try {
         // Validate row
