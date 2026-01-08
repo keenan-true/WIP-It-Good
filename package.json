@@ -18,9 +18,14 @@
     "build": "npm run build --workspaces",
     "db:migrate": "npm run db:migrate --workspace=apps/server",
     "db:seed": "npm run db:seed --workspace=apps/server",
-    "db:studio": "npm run db:studio --workspace=apps/server"
+    "db:studio": "npm run db:studio --workspace=apps/server",
+    "test": "npm run test --workspaces",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:coverage": "npm run test:coverage --workspaces"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "concurrently": "^8.2.2",
     "typescript": "^5.3.3"
   },
