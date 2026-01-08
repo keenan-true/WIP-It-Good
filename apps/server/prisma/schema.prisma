@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Manager {
+  id        String   @id @default(uuid())
+  name      String
+  staff     Staff[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("managers")
+}
+
+enum Location {
+  US
+  UK
+  Contract
+  India
+}
+
+model Staff {
+  id          String       @id @default(uuid())
+  name        String
+  location    Location
+  hourlyCost  Decimal      @map("hourly_cost")
+  managerId   String       @map("manager_id")
+  manager     Manager      @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  allocations Allocation[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("staff")
+}
+
+model Product {
+  id          String       @id @default(uuid())
+  name        String
+  initiatives Initiative[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("products")
+}
+
+enum InitiativeCategory {
+  Contract
+  Promise
+  Expectation
+  Growth
+}
+
+model Initiative {
+  id          String              @id @default(uuid())
+  name        String
+  productId   String              @map("product_id")
+  product     Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category    InitiativeCategory
+  description String?
+  allocations Allocation[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@map("initiatives")
+}
+
+model Allocation {
+  id           String     @id @default(uuid())
+  staffId      String     @map("staff_id")
+  staff        Staff      @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  initiativeId String     @map("initiative_id")
+  initiative   Initiative @relation(fields: [initiativeId], references: [id], onDelete: Cascade)
+  month        Int
+  year         Int
+  percentage   Decimal
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([staffId, initiativeId, month, year])
+  @@map("allocations")
+}

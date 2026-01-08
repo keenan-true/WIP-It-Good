@@ -1,0 +1,31 @@
+{
+  "name": "wip-it-good",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Staff Allocation and Resource Planning for HCAT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "overrides": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm run dev --workspace=apps/server",
+    "dev:client": "npm run dev --workspace=apps/client",
+    "build": "npm run build --workspaces",
+    "db:migrate": "npm run db:migrate --workspace=apps/server",
+    "db:seed": "npm run db:seed --workspace=apps/server",
+    "db:studio": "npm run db:studio --workspace=apps/server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
