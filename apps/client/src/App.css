@@ -1,0 +1,180 @@
+.app {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.nav a:hover {
+  background-color: rgba(100, 108, 255, 0.1);
+}
+
+.nav a.active {
+  background-color: #646cff;
+  color: white;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.page {
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #242424;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1a1a1a;
+}
+
+thead {
+  background-color: #2a2a2a;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+th {
+  font-weight: 600;
+}
+
+tbody tr:hover {
+  background-color: rgba(100, 108, 255, 0.1);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-small {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.btn-danger {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #ff5252;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .modal {
+    background-color: #ffffff;
+  }
+  
+  table {
+    background-color: #f9f9f9;
+  }
+  
+  thead {
+    background-color: #e9e9e9;
+  }
+  
+  th,
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+}
+
