@@ -3,6 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { staffApi, initiativesApi, allocationsApi, productsApi } from '../api/client';
+import { MONTHLY_HOURS } from '@wip-it-good/shared';
 
 interface Staff {
   id: string;
@@ -109,7 +110,7 @@ export default function AllocationsPage() {
   };
 
   const calculateMonthlyHours = (percentage: number) => {
-    return Math.round((percentage / 100) * 173);
+    return Math.round((percentage / 100) * MONTHLY_HOURS);
   };
 
   const saveAllocation = async (
