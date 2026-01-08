@@ -5,7 +5,7 @@ import {
   productSchema,
   initiativeSchema,
   allocationSchema,
-} from './schemas';
+} from './schemas.js';
 
 export type Manager = z.infer<typeof managerSchema>;
 export type Staff = z.infer<typeof staffSchema>;

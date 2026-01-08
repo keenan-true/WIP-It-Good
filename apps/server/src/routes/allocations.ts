@@ -63,7 +63,7 @@ router.get('/summary/:staffId/:month/:year', async (req, res) => {
     });
 
     const totalPercentage = allocations.reduce(
-      (sum, allocation) => sum + parseFloat(allocation.percentage.toString()),
+      (sum: number, allocation: any) => sum + parseFloat(allocation.percentage.toString()),
       0
     );
 

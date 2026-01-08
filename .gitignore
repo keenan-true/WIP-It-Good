@@ -36,5 +36,8 @@ lerna-debug.log*
 *.swo
 *~
 
+# Specstory
+.specstory/
+
 # Prisma
 apps/server/prisma/migrations/
