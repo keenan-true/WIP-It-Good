@@ -198,6 +198,11 @@ export default function AllocationsPage() {
       saveAllocation(params.data.staffId, params.data.initiativeId, monthData.month, monthData.year, value);
       return true;
     },
+    cellRenderer: (params: any) => {
+      const value = params.value;
+      if (value === '' || value === null || value === undefined) return '';
+      return `${value}%`;
+    },
     cellStyle: (params: any) => {
       const value = params.value || 0;
       if (value === 0) return { backgroundColor: '#ffffff', textAlign: 'center' };
@@ -350,24 +355,34 @@ export default function AllocationsPage() {
     setWindowStart(newDate);
   };
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <div className="loading">Loading</div>;
 
   return (
     <div className="page">
-      <h1>Staff Allocations</h1>
-      <p>Enter percentage allocations for each staff member per initiative per month</p>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h1 className="mb-2">Staff Allocations</h1>
+          <p className="text-muted mb-0">Manage resource allocation across initiatives</p>
+        </div>
+      </div>
 
-      <div className="button-group" style={{ marginTop: '1rem' }}>
-        <button onClick={() => moveWindow('prev')}>← Previous Month</button>
-        <button onClick={() => moveWindow('next')}>Next Month →</button>
-        <span style={{ padding: '0.6em 1.2em' }}>
-          Showing: {getMonthsArray()[0].label} - {getMonthsArray()[5].label}
+      <div className="d-flex align-items-center gap-2 mb-3">
+        <button className="btn btn-outline-primary btn-sm" onClick={() => moveWindow('prev')}>
+          <i className="bi bi-chevron-left me-1"></i>
+          Previous
+        </button>
+        <button className="btn btn-outline-primary btn-sm" onClick={() => moveWindow('next')}>
+          Next
+          <i className="bi bi-chevron-right ms-1"></i>
+        </button>
+        <span className="badge bg-secondary ms-2">
+          {getMonthsArray()[0].label} - {getMonthsArray()[5].label}
         </span>
       </div>
 
       <div
         className="ag-theme-alpine"
-        style={{ height: 600, width: `${gridWidth}px`, marginTop: '1rem' }}
+        style={{ height: 600, width: `${gridWidth}px` }}
       >
         <AgGridReact
           ref={gridRef}
@@ -384,11 +399,11 @@ export default function AllocationsPage() {
         />
       </div>
 
-      <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#f5f5f5', borderRadius: '4px', color: '#333' }}>
-        <h3 style={{ color: '#333' }}>Legend</h3>
-        <p style={{ color: '#333' }}><strong>Cell colors:</strong> Lighter = lower allocation, Darker = higher allocation</p>
-        <p style={{ color: '#333' }}><strong>Hover over cells</strong> to see approximate monthly hours (based on 2080 annual hours)</p>
-        <p style={{ color: '#333' }}><strong>New assignments:</strong> Use the empty row at the bottom to add staff to initiatives</p>
+      <div className="legend-card">
+        <h3><i className="bi bi-info-circle me-2"></i>Guide</h3>
+        <p><strong>Cell colors:</strong> Lighter shades indicate lower allocation percentages, darker shades indicate higher allocation</p>
+        <p><strong>Hover over cells:</strong> View approximate monthly hours (based on 2,080 annual hours)</p>
+        <p><strong>Adding assignments:</strong> Use the row at the bottom with "→ Add staff..." to create new allocations</p>
       </div>
     </div>
   );

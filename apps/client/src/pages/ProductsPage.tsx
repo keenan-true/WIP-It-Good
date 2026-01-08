@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { productsApi } from '../api/client';
+import Modal from '../components/Modal';
 
 interface Product {
   id: string;
@@ -69,38 +71,47 @@ export default function ProductsPage() {
     setEditingProduct(null);
   };
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <div className="loading">Loading</div>;
 
   return (
     <div className="page">
-      <h1>Products</h1>
-      
-      <div className="button-group">
-        <button onClick={() => setShowModal(true)}>Add Product</button>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h1 className="mb-2"><i className="bi bi-box me-2"></i>Products</h1>
+          <p className="text-muted mb-0">Manage product portfolios and initiatives</p>
+        </div>
+        <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+          <i className="bi bi-plus-circle me-1"></i>
+          Add Product
+        </button>
       </div>
 
       <div className="table-container">
-        <table>
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>Name</th>
               <th>Initiatives Count</th>
-              <th>Actions</th>
+              <th className="text-end">Actions</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product) => (
               <tr key={product.id}>
-                <td>{product.name}</td>
-                <td>{product.initiatives?.length || 0}</td>
-                <td className="actions">
-                  <button className="btn-small" onClick={() => handleEdit(product)}>
+                <td><strong>{product.name}</strong></td>
+                <td>
+                  <span className="badge bg-success">{product.initiatives?.length || 0}</span>
+                </td>
+                <td className="text-end">
+                  <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(product)}>
+                    <i className="bi bi-pencil me-1"></i>
                     Edit
                   </button>
                   <button
-                    className="btn-small btn-danger"
+                    className="btn btn-sm btn-outline-danger"
                     onClick={() => handleDelete(product.id)}
                   >
+                    <i className="bi bi-trash me-1"></i>
                     Delete
                   </button>
                 </td>
@@ -110,31 +121,42 @@ export default function ProductsPage() {
         </table>
       </div>
 
-      {showModal && (
-        <div className="modal-overlay" onClick={handleCancel}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ name: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="button-group">
-                <button type="submit">Save</button>
-                <button type="button" onClick={handleCancel}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+      <Modal
+        isOpen={showModal}
+        onClose={handleCancel}
+        title={editingProduct ? 'Edit Product' : 'Add Product'}
+        icon="bi-box"
+      >
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              value={formData.name}
+              onChange={(e) => setFormData({ name: e.target.value })}
+              required
+            />
           </div>
-        </div>
-      )}
+          <div style={{
+            padding: '1rem 0',
+            borderTop: '1px solid #dee2e6',
+            display: 'flex',
+            gap: '0.5rem',
+            justifyContent: 'flex-end'
+          }}>
+            <button type="submit" className="btn btn-primary">
+              <i className="bi bi-check-circle me-1"></i>
+              Save
+            </button>
+            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+              <i className="bi bi-x-circle me-1"></i>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }
