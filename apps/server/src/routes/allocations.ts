@@ -2,6 +2,7 @@ import { Router } from 'express';
 import prisma from '../config/database.js';
 import { validate } from '../middleware/validate.js';
 import { allocationSchema } from '@wip-it-good/shared';
+import { STANDARD_MONTHLY_HOURS } from '../config/constants.js';
 
 const router = Router();
 
@@ -67,9 +68,7 @@ router.get('/summary/:staffId/:month/:year', async (req, res) => {
       0
     );
 
-    // Calculate monthly hours (2080 annual hours / 12 months ≈ 173.33 hours/month)
-    const monthlyHours = 173.33;
-    const totalHours = Math.round((totalPercentage / 100) * monthlyHours);
+    const totalHours = Math.round((totalPercentage / 100) * STANDARD_MONTHLY_HOURS);
 
     res.json({
       staffId,
