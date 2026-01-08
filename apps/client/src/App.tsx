@@ -17,7 +17,7 @@ function App() {
           </span>
           <div className="navbar-nav ms-auto">
             <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-              <i className="bi bi-grid-3x3-gap me-1"></i>
+              <i className="bi bi-calendar-check me-1"></i>
               Allocations
             </NavLink>
             <NavLink to="/staff" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>

@@ -149,10 +149,18 @@ Format your CSV with these columns:
 ```bash
 npm run dev              # Run both client and server
 npm run build            # Build all workspaces
+npm run test             # Run all tests (client + server)
+npm run test:e2e         # Run end-to-end tests
+npm run test:coverage    # Run tests with coverage reports
 npm run db:migrate       # Run Prisma migrations
 npm run db:seed          # Seed database
 npm run db:studio        # Open Prisma Studio
 ```
+
+## Documentation
+
+- **[Testing Guide](docs/TESTING.md)** - Comprehensive testing documentation including unit, integration, and E2E tests
+- **[Security Fix](docs/SECURITY_FIX.md)** - Git history remediation for exposed secrets
 
 ## License
 

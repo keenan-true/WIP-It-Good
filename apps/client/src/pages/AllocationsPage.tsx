@@ -361,7 +361,10 @@ export default function AllocationsPage() {
     <div className="page">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h1 className="mb-2">Staff Allocations</h1>
+          <h1 className="mb-2">
+            <i className="bi bi-calendar-check me-2"></i>
+            Staff Allocations
+          </h1>
           <p className="text-muted mb-0">Manage resource allocation across initiatives</p>
         </div>
       </div>
