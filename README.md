@@ -3,6 +3,14 @@ Staff Allocation and Resource Planning for HCAT
 
 A modern TypeScript monorepo application for managing staff allocations across products and initiatives with a spreadsheet-like interface for monthly resource planning.
 
+### Staff Allocations
+![Staff Allocations Grid](docs/screenshots/staff-allocations.png)
+*Spreadsheet-like interface for managing staff allocations across initiatives with 6-month sliding window view*
+
+### Initiatives
+![Initiatives Management](docs/screenshots/initiatives.png)
+*Track and manage project initiatives by product with categorized tags (Contract/Promise/Expectation/Growth)*
+
 ## Tech Stack
 
 - **Frontend**: React + TypeScript + Vite + ag-grid-react
