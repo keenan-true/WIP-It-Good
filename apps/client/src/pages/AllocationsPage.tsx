@@ -64,17 +64,17 @@ export default function AllocationsPage() {
       setProducts(Array.isArray(productsRes.data) ? productsRes.data : []);
       
       // Build initial staff allocations from existing data
-      const staffAllocMap: Record<string, Set<string>> = {};
+      const staffAllocationMap: Record<string, Set<string>> = {};
       (Array.isArray(allocationsRes.data) ? allocationsRes.data : []).forEach((alloc: any) => {
-        if (!staffAllocMap[alloc.staffId]) {
-          staffAllocMap[alloc.staffId] = new Set();
+        if (!staffAllocationMap[alloc.staffId]) {
+          staffAllocationMap[alloc.staffId] = new Set();
         }
-        staffAllocMap[alloc.staffId].add(alloc.initiativeId);
+        staffAllocationMap[alloc.staffId].add(alloc.initiativeId);
       });
       
       const finalMap: Record<string, string[]> = {};
-      Object.keys(staffAllocMap).forEach(staffId => {
-        finalMap[staffId] = Array.from(staffAllocMap[staffId]);
+      Object.keys(staffAllocationMap).forEach(staffId => {
+        finalMap[staffId] = Array.from(staffAllocationMap[staffId]);
       });
       setStaffAllocations(finalMap);
     } catch (error) {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
 import { productsApi } from '../api/client';
 import Modal from '../components/Modal';
 
